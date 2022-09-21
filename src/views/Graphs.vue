@@ -1,9 +1,12 @@
 <script>
+import GoogleChart from '../components/GoogleChart.vue'
+
 import HorizontalBar from "../components/HorizontalBar.vue";
 
 export default {
   name: 'Graphs',
   components: {
+    GoogleChart,
     HorizontalBar,
   },
   async created() {
@@ -18,12 +21,12 @@ export default {
   },
   methods : {
     async fetchEntries() {
-      console.log('here 1')
       const res = await fetch(`http://localhost:5000/entries`)
 
-      const data = await res.json()
+      const rdata = await res.json()
+//output = rdata.map(x => Object.entries(x).reduce((a, [k, v]) => ({...a, [rdata[0][k]]: v}), {}));
 
-      return data
+      return rdata
     },
   },
 
@@ -31,7 +34,9 @@ export default {
 </script>
 
 <template>
-<HorizontalBar :entries="entries" :columns="columns" :format="format" />
+<GoogleChart :data="entries"/>
+
+<HorizontalBar :entries="entries" :columns="columns" :format="format" /> 
 </template>
 
 <style>

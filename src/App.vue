@@ -80,7 +80,6 @@ header {
 
   .container {
     border: 1px solid red;
-    max-width: 500px;
     margin: 30px auto;
     min-height: 300px;
     padding: 30px;
