@@ -1,7 +1,7 @@
 FROM ubi8/nodejs-16
 
 # Add application sources
-ADD app-src .
+ADD . .
 
 # Install the dependencies
 RUN npm install
