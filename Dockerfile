@@ -14,6 +14,6 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 5173 5000
 
-CMD ["npm", "run" , "$APP_TO_RUN"]
+CMD npm run $APP_TO_RUN
 
 
