@@ -1,9 +1,6 @@
 FROM ubi8/nodejs-14
 
-WORKDIR /app
-
 ENV APP_TO_RUN=$APP_TO_RUN
-RUN echo $APP_TO_RUN
 
 COPY entrypoint.sh /entrypoint.sh
  
