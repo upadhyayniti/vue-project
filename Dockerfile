@@ -1,15 +1,10 @@
 FROM ubi8/nodejs-16
 
-WORKDIR /app
+# Add application sources
+ADD app-src .
 
-COPY entrypoint.sh /entrypoint.sh
-
-ADD . .
-
+# Install the dependencies
 RUN npm install
 
-ENTRYPOINT ["/entrypoint.sh"]
-
-EXPOSE 5173 5000
-
-CMD ["/bin/bash"]
+# Run script uses standard ways to run the application
+CMD npm run -d start
