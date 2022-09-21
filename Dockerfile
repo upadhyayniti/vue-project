@@ -1,6 +1,7 @@
 FROM ubi8/nodejs-14
 
 WORKDIR /app
+RUN chmod +x /app
 
 ENV APP_TO_RUN=$APP_TO_RUN
 
