@@ -1,4 +1,4 @@
-FROM ubi8/nodejs-16
+FROM ubi8/nodejs-14
 
 # Add application sources
 ADD . .
