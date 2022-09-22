@@ -1,6 +1,5 @@
 FROM ubi8/nodejs-14
 
-USER node
 
 ENV APP_TO_RUN=$APP_TO_RUN
 
@@ -11,6 +10,7 @@ ADD . .
 
 # Install the dependencies
 RUN npm install
+USER node
 
 RUN mkdir 'node_modules/.vite' && mkdir 'node_modules/.vite/deps_temp' && mkdir 'node_modules/.vite/deps'
 
