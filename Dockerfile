@@ -10,7 +10,11 @@ ADD . .
 # Install the dependencies
 RUN npm install
 
+RUN adduser node root
+
 RUN mkdir 'node_modules/.vite' && mkdir 'node_modules/.vite/deps_temp' && mkdir 'node_modules/.vite/deps' 
+
+USER node
 
 ENTRYPOINT ["/entrypoint.sh"]
 
