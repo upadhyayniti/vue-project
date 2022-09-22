@@ -10,6 +10,8 @@ ADD . .
 # Install the dependencies
 RUN npm install
 
+RUN mkdir '/opt/app-root/src/node_modules/.vite/deps_temp' && mkdir '/opt/app-root/src/node_modules/.vite/deps'
+
 ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 5173 5000
