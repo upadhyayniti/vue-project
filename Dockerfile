@@ -1,5 +1,7 @@
 FROM ubi8/nodejs-14
 
+USER node
+
 ENV APP_TO_RUN=$APP_TO_RUN
 
 COPY entrypoint.sh /entrypoint.sh
