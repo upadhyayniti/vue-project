@@ -10,7 +10,7 @@ ADD . .
 
 # Install the dependencies
 RUN npm install
-USER node
+USER 1001
 
 RUN mkdir 'node_modules/.vite' && mkdir 'node_modules/.vite/deps_temp' && mkdir 'node_modules/.vite/deps'
 
