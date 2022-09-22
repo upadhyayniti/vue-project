@@ -1,6 +1,5 @@
 FROM ubi8/nodejs-14
 
-
 ENV APP_TO_RUN=$APP_TO_RUN
 
 COPY entrypoint.sh /entrypoint.sh
@@ -10,7 +9,7 @@ ADD . .
 
 # Install the dependencies
 RUN npm install
-USER 1001
+USER 1000770000
 
 RUN mkdir 'node_modules/.vite' && mkdir 'node_modules/.vite/deps_temp' && mkdir 'node_modules/.vite/deps'
 
