@@ -1,4 +1,4 @@
-FROM ubi8/nodejs-14
+FROM registry.access.redhat.com/ubi8/nodejs-14
 
 ENV APP_TO_RUN=$APP_TO_RUN
 
