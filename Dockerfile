@@ -6,9 +6,9 @@ COPY entrypoint.sh /entrypoint.sh
 
 COPY package*.json ./
 
-RUN [ "/bin/bash", "-c", "npm install && mv node_modules ../"]
+RUN npm install
 
-ENV PATH /usr/node_modules/.bin:$PATH
+RUN mkdir 'node_modules/.vite' 
 
 COPY . .
 
