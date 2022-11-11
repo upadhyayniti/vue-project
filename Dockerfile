@@ -2,8 +2,6 @@ FROM node:12
 
 ENV APP_TO_RUN=$APP_TO_RUN
 
-WORKDIR /usr/src/app
-
 COPY entrypoint.sh /entrypoint.sh
 
 COPY package*.json ./
