@@ -17,6 +17,10 @@ RUN npm install \
  && chown -R 1001:1001 . \
  && chmod -R 777 .
 
+RUN mkdir 'node_modules/.vite' 
+
+ENTRYPOINT ["/entrypoint.sh"]
+
 USER 1001
 
 EXPOSE 5173 5000
