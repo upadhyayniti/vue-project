@@ -21,6 +21,5 @@ USER 1001
 
 EXPOSE 5173 5000
 
-CMD npm run $APP_TO_RUN
 
 
