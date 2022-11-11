@@ -1,29 +1,25 @@
-FROM quay.io/polyglotsystems/ubi8-nginx:latest
+FROM node:12
 
 ENV APP_TO_RUN=$APP_TO_RUN
 
-USER root
+WORKDIR /usr/src/app
 
-# Add application sources
-ADD . .
+COPY entrypoint.sh /entrypoint.sh
 
-COPY container-root/ /
+COPY package*.json ./
 
-COPY . /var/www/html
+RUN [ "/bin/bash", "-c", "npm install && mv node_modules ../"]
 
-# Install the dependencies
-RUN npm install \
- && npm run build \
- && chown -R 1001:1001 . \
- && chmod -R 777 .
+ENV PATH /usr/node_modules/.bin:$PATH
 
-RUN mkdir 'node_modules/.vite' 
+COPY . .
 
 ENTRYPOINT ["/entrypoint.sh"]
 
-USER 1001
-
 EXPOSE 5173 5000
+
+CMD npm run $APP_TO_RUN
+
 
 
 
