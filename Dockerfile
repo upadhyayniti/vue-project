@@ -1,22 +1,23 @@
 FROM node:12
 
-ENV APP_TO_RUN=$APP_TO_RUN
-
-COPY entrypoint.sh /entrypoint.sh
-
+WORKDIR /app
 COPY package*.json ./
-
 RUN npm install
+COPY ./ .
+RUN npm run build \
+ && chown -R 1001:1001 . \
+ && chmod -R 777 .
 
-RUN mkdir 'node_modules/.vite' 
+# production stage
+FROM nginxinc/nginx-unprivileged:stable-alpine as production-stage
+USER 1001
+COPY --from=build-stage /app/dist /usr/share/nginx/html
 
-COPY . .
+RUN echo $(ls -1 /usr/share/nginx/html)
 
-ENTRYPOINT ["/entrypoint.sh"]
+RUN echo $(ls -1 /app/dist)
 
 EXPOSE 5173 5000
-
-CMD npm run $APP_TO_RUN
 
 
 
