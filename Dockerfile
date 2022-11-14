@@ -1,5 +1,5 @@
 # build stage
-FROM node:lts-alpine as build-stage
+FROM registry.access.redhat.com/ubi8/nodejs-16 as build-stage
 USER root
 WORKDIR /app
 COPY package*.json ./
@@ -13,10 +13,6 @@ RUN npm run build \
 FROM nginxinc/nginx-unprivileged:stable-alpine as production-stage
 USER 1001
 COPY --from=build-stage /app/dist /usr/share/nginx/html
-
-RUN echo $(ls -1 /usr/share/nginx/html)
-
-RUN echo $(ls -1 /app/dist)
 
 EXPOSE 5173 5000
 
