@@ -1,5 +1,6 @@
-FROM registry.access.redhat.com/ubi8/nodejs-16 as build-stage
-
+# build stage
+FROM node:lts-alpine as build-stage
+USER root
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
