@@ -1,0 +1,64 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: vue-pipeline
+  namespace: vue
+spec:
+  params:
+    - description: Location of the repo where image has to be pushed
+      name: IMAGE
+      type: string
+    - description: Location of code
+      name: CODE
+      type: string
+    - description: Branch of code
+      name: BRANCH
+      type: string
+      default: prod
+  tasks:
+    - name: fetch-repository
+      params:
+        - name: url
+          value: $(params.CODE)
+        - name: subdirectory
+          value: ''
+        - name: deleteExisting
+          value: 'true'
+        - name: revision
+          value: $(params.BRANCH)
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+    - name: vue-build
+      params:
+        - name: IMAGE
+          value: $(params.IMAGE)
+        - name: DOCKERFILE
+          value: Dockerfile
+      runAfter:
+        - fetch-repository
+      taskRef:
+        kind: ClusterTask
+        name: buildah
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+    - name: deploy
+      params:
+        - name: SCRIPT
+          value: oc rollout status deploy/$(params.APP_NAME)
+      runAfter:
+        - vue-build
+      taskRef:
+        kind: ClusterTask
+        name: openshift-client
+  workspaces:
+    - name: shared-workspace
+
+
+
+      # REMEMBER THE PVC tkn pipeline start build-and-deploy     -w name=shared-workspace,volumeClaimTemplateFile=https://raw.githubusercontent.com/openshift/pipelines-tutorial/master/01_pipeline/03_persistent_volume_claim.yaml     -p deployment-name=vue     -p git-url=https://github.com/upadhyayniti/vue-project.git     -p IMAGE=image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/vue     --use-param-defaults
+
