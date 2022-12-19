@@ -11,6 +11,10 @@ spec:
     - description: Location of code
       name: CODE
       type: string
+    - description: Deployment Name
+      name: NAME
+      type: string
+      default: vue
     - description: Branch of code
       name: BRANCH
       type: string
@@ -54,19 +58,17 @@ spec:
         workspace: shared-workspace
       runAfter:
       - vue-build
+    - name: update-deployment
+      taskRef:
+        name: update-deployment
+      params:
+      - name: deployment
+        value: $(params.NAME)
+      - name: IMAGE
+        value: $(params.IMAGE)
+      runAfter:
+      - apply-manifests
   workspaces:
     - name: shared-workspace
 
-
-
-      # REMEMBER THE PVC tkn pipeline start build-and-deploy     -w name=shared-workspace,volumeClaimTemplateFile=https://raw.githubusercontent.com/openshift/pipelines-tutorial/master/01_pipeline/03_persistent_volume_claim.yaml     -p deployment-name=vue     -p git-url=https://github.com/upadhyayniti/vue-project.git     -p IMAGE=image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/vue     --use-param-defaults
-
-#    - name: deploy
-#      params:
-#        - name: SCRIPT
-#          value: oc rollout status deploy/$(params.APP_NAME)
-#      runAfter:
-#        - vue-build
-#      taskRef:
-#        kind: ClusterTask
-#        name: openshift-client
+#To use newly created image, need update-deployment unless you hardcode image url in deployment.yaml. 

@@ -23,5 +23,5 @@ spec:
       containers:
         - name: vue-project
           image: >-
-            image-registry.openshift-image-registry.svc:5000/vue/vue-project:latest
+            quay.io/nupadhya/vue:latest
           resources: {}

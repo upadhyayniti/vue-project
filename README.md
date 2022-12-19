@@ -48,6 +48,8 @@ oc apply -f pipeline/00_pipeline_storage.yaml
 oc apply -f pipeline/01_apply_manifest_task.yaml 
 oc apply -f pipeline/02_updated_deployment_task.yaml 
 oc apply -f pipeline/03_pipeline.yaml
+
+tkn pipeline start vue-pipeline  -w name=shared-workspace,claimName=source-pvc -p NAME=vue-project -p CODE=https://github.com/upadhyayniti/vue-project.git     -p IMAGE=image-registry.openshift-image-registry.svc:5000/vue/vue-project:latest     --use-param-defaults
 ```
 
 

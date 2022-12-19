@@ -2,7 +2,7 @@
     <!--div v-if="showAddTask" -->
       <AddTask @add-task="addTask" v-show="showAddTask" />
     <!--/div -->
-    <router-link to="/graphs">Graphs</router-link>
+    <router-link to="/graphs">GRAPHS</router-link>
 
     <Tasks @toggle-reminder="toggleReminder"  @delete-task="deleteTask" :tasks="tasks" />
 
