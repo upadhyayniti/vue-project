@@ -1,0 +1,22 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: vue-project
+  namespace: vue
+  labels:
+    app: vue
+    app.kubernetes.io/component: vue-project
+    app.kubernetes.io/instance: vue-project
+    app.kubernetes.io/name: vue-project
+    app.kubernetes.io/part-of: vue-project-app
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  internalTrafficPolicy: Cluster
+  type: ClusterIP
+  selector:
+    app: vue-project
+    deploymentconfig: vue-project

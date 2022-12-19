@@ -37,3 +37,18 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### Setting pipeline
+
+Install Red Hat OpenShift Pipelines on OpenShift using defaults
+
+```sh
+oc new-project vue
+oc apply -f pipeline/00_pipeline_storage.yaml
+oc apply -f pipeline/01_apply_manifest_task.yaml 
+oc apply -f pipeline/02_updated_deployment_task.yaml 
+oc apply -f pipeline/03_pipeline.yaml
+```
+
+
+

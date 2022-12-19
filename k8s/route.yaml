@@ -1,0 +1,20 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: vue-project
+  namespace: vue
+  labels:
+    app: vue
+    app.kubernetes.io/component: vue-project
+    app.kubernetes.io/instance: vue-project
+    app.kubernetes.io/name: vue-project
+    app.kubernetes.io/part-of: vue-project-app
+spec:
+#  host: vue-project-vue-project.apps.cluster-8gr4s.8gr4s.sandbox2251.opentlc.com
+  to:
+    kind: Service
+    name: vue-project
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  wildcardPolicy: None

@@ -46,15 +46,14 @@ spec:
       workspaces:
         - name: source
           workspace: shared-workspace
-    - name: deploy
-      params:
-        - name: SCRIPT
-          value: oc rollout status deploy/$(params.APP_NAME)
-      runAfter:
-        - vue-build
+    - name: apply-manifests
       taskRef:
-        kind: ClusterTask
-        name: openshift-client
+        name: apply-manifests
+      workspaces:
+      - name: source
+        workspace: shared-workspace
+      runAfter:
+      - vue-build
   workspaces:
     - name: shared-workspace
 
@@ -62,3 +61,12 @@ spec:
 
       # REMEMBER THE PVC tkn pipeline start build-and-deploy     -w name=shared-workspace,volumeClaimTemplateFile=https://raw.githubusercontent.com/openshift/pipelines-tutorial/master/01_pipeline/03_persistent_volume_claim.yaml     -p deployment-name=vue     -p git-url=https://github.com/upadhyayniti/vue-project.git     -p IMAGE=image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/vue     --use-param-defaults
 
+#    - name: deploy
+#      params:
+#        - name: SCRIPT
+#          value: oc rollout status deploy/$(params.APP_NAME)
+#      runAfter:
+#        - vue-build
+#      taskRef:
+#        kind: ClusterTask
+#        name: openshift-client
