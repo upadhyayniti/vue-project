@@ -3,6 +3,8 @@ import { defineComponent, h } from 'vue';
 
 import { GChart } from 'vue-google-charts';
 
+import CouchServer from './Couchbase.vue'
+
 export const type = 'BarChart';
 
 export const data = 
@@ -46,4 +48,36 @@ export default defineComponent({
   },
 });
 
+/* const text = '{"requestID": "615e0b26-dd61-4a1a-bda9-22333193b982", "results": [   {"name": "Number 1 Youth Hostel","signature": "json"},{"name": "Medway Youth Hostel","signature": "array"} ],  "status": "success", "signature": {"name": "json" }}';
+const obj = JSON.parse(text);
+const keys = Object.keys(obj.results[0])
+
+let abc = '';
+let newArray = [];	
+
+// expand to have the correct amount or rows
+newArray.push( [] );
+
+keys.forEach(makeArray);
+newArray.forEach(myFunction);
+
+
+function makeArray(item, index) {
+	newArray[0].push(item);
+    newArray.push([obj.results[index].name,obj.results[index].signature]);
+}
+
+function myFunction(item, index) {
+  abc += index + ": " + item + "<br>"; 
+}
+
+
+document.getElementById("demo").innerHTML = abc;
+
+
+0: name,signature
+1: Number 1 Youth Hostel,json
+2: Medway Youth Hostel,array
+
+*/
 </script>

@@ -40,7 +40,7 @@ npm run build
 
 ### Setting pipeline
 
-Install Red Hat OpenShift Pipelines on OpenShift using defaults
+Install Red Hat OpenShift Pipelines Operator on OpenShift using defaults
 
 ```sh
 oc new-project vue
